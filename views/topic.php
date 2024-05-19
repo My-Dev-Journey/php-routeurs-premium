@@ -9,7 +9,7 @@
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding-bottom:80px;
+            padding-bottom: 80px;
             box-sizing: border-box;
         }
 
@@ -106,7 +106,7 @@
             background-color: #333;
             color: white;
             text-align: center;
-            height:80px;
+            height: 80px;
             position: fixed;
             width: 100%;
             bottom: 0;
@@ -150,14 +150,15 @@
                 </div>
             <?php endforeach; ?>
         </div>
-        <?php if($logged_in): ?>
-        <div class="reply-form">
-            <h3>Répondre au sujet</h3>
-            <form action="create-message.php" method="post">
-                <textarea name="message" rows="5" placeholder="Votre message"></textarea>
-                <button type="submit">Envoyer</button>
-            </form>
-        </div>
+        <?php if ($logged_in) : ?>
+            <div class="reply-form">
+                <h3>Répondre au sujet</h3>
+                <form action="create-message.php" method="post">
+                    <input type="hidden" name="topic_id" value="<?= $topic['id'] ?>" />
+                    <textarea name="message" rows="5" placeholder="Votre message"></textarea>
+                    <button type="submit">Envoyer</button>
+                </form>
+            </div>
         <?php endif; ?>
     </div>
 

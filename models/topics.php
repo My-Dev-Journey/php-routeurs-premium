@@ -22,3 +22,10 @@ function getTopic(int $id): array
         ]
     ];
 }
+
+
+function addNewMessage(int $topic_id, string $message)
+{
+    // Simulation ajout en base de données
+
+}
