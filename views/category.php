@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accueil du Forum</title>
+    <title>Sujets de la Catégorie</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -44,45 +44,43 @@
             padding: 20px;
         }
 
-        .categories {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: space-around;
+        .category-header {
+            margin-bottom: 20px;
+            text-align: center;
         }
 
-        .category {
-            background-color: #f4f4f4;
+        .topics {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .topics th,
+        .topics td {
             border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 20px;
-            flex: 1 1 calc(33.333% - 40px);
-            box-sizing: border-box;
-            text-align: center;
-            text-decoration: none;
-            color: black;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .topics th {
+            background-color: #f4f4f4;
+        }
+
+        .topics tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .topics tr:hover {
+            background-color: #f1f1f1;
         }
 
         footer {
             background-color: #333;
             color: white;
             text-align: center;
-            height: 80px;
+            height:80px;
             position: absolute;
             width: 100%;
             bottom: 0;
-        }
-
-        @media (max-width: 768px) {
-            .category {
-                flex: 1 1 calc(50% - 40px);
-            }
-        }
-
-        @media (max-width: 480px) {
-            .category {
-                flex: 1 1 100%;
-            }
         }
     </style>
 </head>
@@ -90,14 +88,13 @@
 <body>
 
     <header>
-        <h1>Bienvenue sur le Forum</h1>
+        <h1>Catégorie: <?= $category ?></h1>
     </header>
 
     <nav>
-        <div>
-            <a href="#home">Accueil</a>
-        </div>
+        <div><a href="index.php">Accueil</a></div>
         <?php if ($logged_in) : ?>
+
             <div>
                 <a href="">Profil</a>
             </div>
@@ -110,19 +107,32 @@
     </nav>
 
     <div class="container">
-        <h2>Catégories</h2>
-        <div class="categories">
-            <?php foreach ($categories as $category) : ?>
-                <a href="category.php?name=<?= urlencode($category['name'])  ?>" class="category">
-                    <h3><?= $category['name']  ?></h3>
-                    <p><?= $category['description'] ?></p>
-                </a>
-            <?php endforeach; ?>
+        <div class="category-header">
+            <h2>Sujets</h2>
         </div>
+        <table class="topics">
+            <thead>
+                <tr>
+                    <th>Sujet</th>
+                    <th>Dernier message</th>
+                    <th>Dernière activité</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($topics as $topic) : ?>
+                    <tr>
+                        <td><a href="topic.php?id=<?= $topic['id'] ?>"><?= $topic['name'] ?></a></td>
+                        <td><?= $topic['last_post_content'] ?></td>
+                        <td><?= $topic['last_update'] ?></td>
+                    </tr>
+                <?php endforeach; ?>
+                <!-- Ajoutez d'autres sujets ici -->
+            </tbody>
+        </table>
     </div>
 
     <footer>
-        <p>Nombre de membres : <?= $nb_users ?> | Nombre de sujets : <?= $nb_topics ?> | Nombre de messages : <?= $nb_messages ?></p>
+        <p>Nombre de membres : 1234 | Nombre de sujets : 5678 | Nombre de messages : 91011</p>
     </footer>
 
 </body>
