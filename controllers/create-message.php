@@ -1,7 +1,5 @@
 <?php
 
-session_start();
-
 require_once '../models/topics.php';
 
 if (!$_SESSION['auth']) {
