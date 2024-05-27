@@ -6,8 +6,10 @@ require '../controllers/index.php';
 require '../controllers/login.php';
 require '../controllers/categoryAndTopics.php';
 
+require '../middlewares/authentication.php';
+
 switch ($action) {
-    case '': 
+    case '':
         index();
         break;
     case 'login':
@@ -20,6 +22,10 @@ switch ($action) {
         showCategory();
         break;
     case 'create-message':
+        checkAuth();
         createMessage();
+        break;
+    case '403':
+        echo 'Erreur 403';
         break;
 }

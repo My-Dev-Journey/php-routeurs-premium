@@ -4,8 +4,6 @@ $nb_users = 1000;
 $nb_topics = 500;
 $nb_messages = 4242;
 
-$logged_in = $_SESSION['auth'] ?? false;
-
 require '../models/topics.php';
 
 if (empty($_GET['id'])) {

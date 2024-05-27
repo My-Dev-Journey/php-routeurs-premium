@@ -6,8 +6,6 @@ $nb_messages = 4242;
 require_once '../models/categories.php';
 require '../models/topics.php';
 
-$logged_in = $_SESSION['auth'] ?? false;
-
 function showCategory()
 {
     $category = $_GET['name']; // Ici je n'ai plus besoin de ?? null, car le routeur va faire la vérification en amont

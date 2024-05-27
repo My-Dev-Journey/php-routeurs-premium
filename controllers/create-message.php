@@ -2,10 +2,6 @@
 
 require_once '../models/topics.php';
 
-if (!$_SESSION['auth']) {
-    return header('location: index.php');
-}
-
 if (empty($_POST['topic_id']) or !is_numeric($_POST['topic_id'])) {
     // Erreur
 }
