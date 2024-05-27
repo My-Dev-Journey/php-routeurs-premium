@@ -11,5 +11,9 @@ require '../models/topics.php';
 if (empty($_GET['id'])) {
     return header('location:index.php');
 }
-$topic = getTopic($_GET['id']);
-require '../views/topic.php';
+
+function showTopic()
+{
+    $topic = getTopic($_GET['id']);
+    require '../views/topic.php';
+}
