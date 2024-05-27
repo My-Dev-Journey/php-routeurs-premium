@@ -5,7 +5,7 @@ require '../models/topics.php';
 
 function showCategory()
 {
-    $category = $_GET['name']; // Ici je n'ai plus besoin de ?? null, car le routeur va faire la vérification en amont
+    $category = $_GET['name'];
     $topics = getTopicsByCategory($category);
 
     require '../views/category.php';

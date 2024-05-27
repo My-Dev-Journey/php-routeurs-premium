@@ -18,10 +18,16 @@ switch ($action) {
         login();
         break;
     case 'topic':
+        if (empty($_GET['id']) or !is_numeric($_GET['id'])) {
+            return header('location:index.php');
+        }
         getStats();
         showTopic();
         break;
     case 'category':
+        if (empty($_GET['name'])) {
+            return header('location: index.php?action=404');
+        }
         getStats();
         showCategory();
         break;
@@ -31,5 +37,8 @@ switch ($action) {
         break;
     case '403':
         echo 'Erreur 403';
+        break;
+    case '404':
+        echo 'Erreur 404';
         break;
 }
