@@ -97,7 +97,7 @@
         <div>
             <a href="#home">Accueil</a>
         </div>
-        <?php if ($logged_in) : ?>
+        <?php if (!empty($_SESSION['auth'])) : ?>
             <div>
                 <a href="">Profil</a>
             </div>

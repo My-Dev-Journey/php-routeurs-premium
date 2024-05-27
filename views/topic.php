@@ -122,7 +122,7 @@
 
     <nav>
         <div><a href="index.php">Accueil</a></div>
-        <?php if ($logged_in) : ?>
+        <?php if (!empty($_SESSION['auth'])) : ?>
 
             <div>
                 <a href="">Profil</a>
@@ -150,7 +150,7 @@
                 </div>
             <?php endforeach; ?>
         </div>
-        <?php if ($logged_in) : ?>
+        <?php if (!empty($_SESSION['auth'])) : ?>
             <div class="reply-form">
                 <h3>Répondre au sujet</h3>
                 <form action="?action=create-message" method="post">
