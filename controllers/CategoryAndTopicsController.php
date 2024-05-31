@@ -3,17 +3,19 @@
 namespace Controllers;
 
 use Models\Categorie;
+use Models\Managers\CategoriesManager;
+use Models\Managers\TopicsManager;
 use Models\Topic;
 
 class CategoryAndTopicsController
 {
-    private Categorie $categoriesModel;
-    private Topic $topicsModel;
+    private CategoriesManager $categoriesModel;
+    private TopicsManager $topicsModel;
 
     public function __construct()
     {
-        $this->categoriesModel = new Categorie();
-        $this->topicsModel = new Topic();
+        $this->categoriesModel = new CategoriesManager();
+        $this->topicsModel = new TopicsManager();
     }
 
     public function showCategory()

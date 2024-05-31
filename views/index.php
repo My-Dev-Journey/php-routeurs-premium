@@ -113,9 +113,9 @@
         <h2>Catégories</h2>
         <div class="categories">
             <?php foreach ($categories as $category) : ?>
-                <a href="?action=category&name=<?= urlencode($category['name'])  ?>" class="category">
-                    <h3><?= $category['name']  ?></h3>
-                    <p><?= $category['description'] ?></p>
+                <a href="?action=category&name=<?= urlencode($category->name())  ?>" class="category">
+                    <h3><?= $category->name()  ?></h3>
+                    <p><?= $category->description() ?></p>
                 </a>
             <?php endforeach; ?>
         </div>

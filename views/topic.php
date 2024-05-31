@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sujet - <?= $topic['name'] ?></title>
+    <title>Sujet - <?= $topic->name() ?></title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -137,15 +137,15 @@
 
     <div class="container">
         <div class="topic-header">
-            <h2><?= $topic['name'] ?></h2>
+            <h2><?= $topic->name() ?></h2>
         </div>
         <div class="messages">
-            <?php foreach ($topic['messages'] as $message) : ?>
+            <?php foreach ($topic->posts() as $post) : ?>
                 <div class="message">
-                    <div class="message-author"><?= $message['author'] ?></div>
-                    <div class="message-time">Posté le <?= $message['last_update'] ?></div>
+                    <div class="message-author"><?= $post->author() ?></div>
+                    <div class="message-time">Posté le <?= $post->last_update() ?></div>
                     <div class="message-content">
-                        <p><?= $message['content'] ?></p>
+                        <p><?= $post->content() ?></p>
                     </div>
                 </div>
             <?php endforeach; ?>
@@ -154,7 +154,7 @@
             <div class="reply-form">
                 <h3>Répondre au sujet</h3>
                 <form action="?action=create-message" method="post">
-                    <input type="hidden" name="topic_id" value="<?= $topic['id'] ?>" />
+                    <input type="hidden" name="topic_id" value="<?= $topic->id() ?>" />
                     <textarea name="message" rows="5" placeholder="Votre message"></textarea>
                     <button type="submit">Envoyer</button>
                 </form>
