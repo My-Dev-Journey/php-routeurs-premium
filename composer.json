@@ -1,0 +1,16 @@
+{
+    "name": "mydevjourney/routers-php",
+    "authors": [
+        {
+            "name": "Antoine Creuzet"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Controllers\\": "controllers/",
+            "Models\\": "models/",
+            "Middlewares\\": "middlewares/"
+        }
+    }
+}

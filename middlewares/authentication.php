@@ -1,9 +1,14 @@
 <?php
 
-function checkAuth()
+namespace Middlewares;
+
+class Authentication
 {
-    $logged_in = $_SESSION['auth'] ?? false;
-    if(!$logged_in) {
-        return header('location: index.php?action=403');
+    public function checkAuth()
+    {
+        $logged_in = $_SESSION['auth'] ?? false;
+        if (!$logged_in) {
+            return header('location: index.php?action=403');
+        }
     }
 }
