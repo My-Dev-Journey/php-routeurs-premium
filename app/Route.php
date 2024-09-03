@@ -37,9 +37,12 @@ class Route
 
     public function setMiddlewares(array $middlewares)
     {
-        foreach ($middlewares as $middleware) {
+        foreach ($middlewares as $middleware => $method) {
             if (!class_exists($middleware)) {
                 throw new InvalidArgumentException('Le middleware n\'existe pas');
+            }
+            if (!method_exists($middleware, $method)) {
+                throw new InvalidArgumentException('La méthode du middleware n\'existe pas');
             }
         }
         $this->middlewares = $middlewares;
