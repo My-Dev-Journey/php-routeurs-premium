@@ -47,4 +47,29 @@ class Route
         }
         $this->middlewares = $middlewares;
     }
+
+    public function action(): string
+    {
+        return $this->action;
+    }
+
+    public function hasMiddlewares(): bool
+    {
+        return count($this->middlewares) > 0;
+    }
+
+    public function middlewares(): array
+    {
+        return $this->middlewares;
+    }
+
+    public function controller(): string
+    {
+        return $this->controller;
+    }
+
+    public function method(): string
+    {
+        return $this->method;
+    }
 }
