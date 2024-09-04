@@ -77,6 +77,11 @@ class Route
         return $this->verb;
     }
 
+    public function parameters(): array
+    {
+        return $this->parameters;
+    }
+
     public function hasMiddlewares(): bool
     {
         return count($this->middlewares) > 0;

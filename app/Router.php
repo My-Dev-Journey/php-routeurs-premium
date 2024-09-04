@@ -18,7 +18,7 @@ class Router
     public function route()
     {
         foreach ($this->routes as $route) {
-            if ($this->action == $route->action() and $this->requestIs($route->verb())) {
+            if ($this->action == $route->action() and $this->requestIs($route->verb()) and $this->requestHas($route->parameters())) {
                 if ($route->hasMiddlewares()) {
                     $this->callMiddlewares($route->middlewares());
                 }
@@ -32,6 +32,39 @@ class Router
         return $_SERVER['REQUEST_METHOD'] === $verb;
     }
 
+    private function requestHas(array $parameters): bool
+    {
+        foreach ($parameters as $parameter => $constraints) {
+            if (!$this->parameterHasGoodFormat($parameter, $constraints)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private function parameterIsMandatory(array|string $constraints): bool
+    {
+        if (!is_array($constraints)) {
+            return true;
+        }
+        return (array_key_exists('mandatory', $constraints)
+            and $constraints['mandatory']) or !array_key_exists('mandatory', $constraints);
+    }
+
+    private function parameterHasGoodFormat(string $parameter, array|string $constraints): bool
+    {
+        $mandatory = $this->parameterIsMandatory($constraints);
+        if (is_string($constraints)) {
+            $parameter = $constraints;
+        }
+        if ($mandatory and empty($_GET[$parameter])) {
+            return false;
+        }
+        if (is_array($constraints) and array_key_exists('format', $constraints) and !empty($_GET[$parameter])) {
+            return preg_match('/^' . $constraints['format'] . '$/', $_GET[$parameter]);
+        }
+        return true;
+    }
     private function callMiddlewares(array $middlewares)
     {
         foreach ($middlewares as $middleware => $method) {
