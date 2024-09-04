@@ -25,7 +25,7 @@ class Route
                 throw new InvalidArgumentException('La propriété n\'existe pas');
             }
         }
-        $this->checkAreNotMissing(['action'=>$this->action, 'contrôleur'=>$this->controller, 'méthode'=>$this->method]);
+        $this->checkAreNotMissing(['action' => $this->action, 'contrôleur' => $this->controller, 'méthode' => $this->method]);
     }
 
     public function setController(string $controller)
@@ -49,10 +49,20 @@ class Route
         $this->middlewares = $middlewares;
     }
 
-    private function checkAreNotMissing(array $data) {
-        foreach($data as $name=>$property) {
+    public function setVerb(string $verb)
+    {
+        $verb = strtoupper($verb);
+        if (!in_array($verb, ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'])) {
+            throw new InvalidArgumentException('Le verbe HTTP est incorrect : ' . $verb);
+        }
+        $this->verb = $verb;
+    }
+
+    private function checkAreNotMissing(array $data)
+    {
+        foreach ($data as $name => $property) {
             if ($property === null) {
-                throw new InvalidArgumentException('Il manque une donnée : '.$name);
+                throw new InvalidArgumentException('Il manque une donnée : ' . $name);
             }
         }
     }
@@ -60,6 +70,11 @@ class Route
     public function action(): string
     {
         return $this->action;
+    }
+
+    public function verb(): string
+    {
+        return $this->verb;
     }
 
     public function hasMiddlewares(): bool
