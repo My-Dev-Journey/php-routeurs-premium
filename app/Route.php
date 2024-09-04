@@ -6,10 +6,10 @@ use InvalidArgumentException;
 
 class Route
 {
-    private string $action = '';
+    private ?string $action = null;
     private string $verb = 'GET';
     private ?string $controller = null;
-    private string $method = '';
+    private ?string $method = null;
     private array $parameters = [];
     private array $middlewares = [];
 
@@ -25,6 +25,7 @@ class Route
                 throw new InvalidArgumentException('La propriété n\'existe pas');
             }
         }
+        $this->checkAreNotMissing(['action'=>$this->action, 'contrôleur'=>$this->controller, 'méthode'=>$this->method]);
     }
 
     public function setController(string $controller)
@@ -46,6 +47,14 @@ class Route
             }
         }
         $this->middlewares = $middlewares;
+    }
+
+    private function checkAreNotMissing(array $data) {
+        foreach($data as $name=>$property) {
+            if ($property === null) {
+                throw new InvalidArgumentException('Il manque une donnée : '.$name);
+            }
+        }
     }
 
     public function action(): string
